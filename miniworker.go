@@ -18,12 +18,19 @@ import (
 
 // MiniWorker defines the interface for the microservice worker.
 type MiniWorker interface {
+	SetHostname(hostname string)
+	SetThreads(threads int)
+	SetRunnerFunc(runner runnerFunc)
+	SetAMQPQueue(Name string)
+	SetAMQPConfig(c *minimsg.AmqpConfig)
+	RunWorker() error
 }
 
 type Job struct {
-	Action string
-	Domain string
-	Range  string
+	Wordlist string
+	Action   string
+	Domain   string
+	Range    string
 }
 
 type runnerFunc func(log *tinylog.Tiny, job Job) error
