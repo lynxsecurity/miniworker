@@ -31,7 +31,7 @@ type Job struct {
 	Action   string
 	Domain   string
 	Range    string
-	Threads  int
+	Threads  string
 }
 
 type runnerFunc func(log *tinylog.Tiny, job Job) error
