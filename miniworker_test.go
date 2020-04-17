@@ -9,8 +9,8 @@ import (
 	"github.com/lynxsecurity/tinylog"
 )
 
-func Run(job Job) error {
-	fmt.Println("Job domain: ", job.Domain)
+func Run(log *tinylog.Tiny, job Job) error {
+	log.Info(fmt.Sprintf("Job domain: %s", job.Domain))
 	return nil
 }
 func TestWorkerMain(t *testing.T) {
