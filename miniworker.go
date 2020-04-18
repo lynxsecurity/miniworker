@@ -26,13 +26,8 @@ type MiniWorker interface {
 	RunWorker() error
 }
 
-type Job struct {
-	Wordlist string
-	Action   string
-	Domain   string
-	Range    string
-	Threads  string
-}
+// The Job type is what the AMQP JSON message is unmarshalled into.
+type Job map[string]interface{}
 
 type runnerFunc func(log *tinylog.Tiny, job Job) error
 

@@ -10,7 +10,9 @@ import (
 )
 
 func Run(log *tinylog.Tiny, job Job) error {
-	log.Info(fmt.Sprintf("Job domain: %s", job.Domain))
+	for key, val := range job {
+		fmt.Printf("%s: %s\n", key, val)
+	}
 	return nil
 }
 func TestWorkerMain(t *testing.T) {
