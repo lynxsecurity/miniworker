@@ -29,7 +29,7 @@ type MiniWorker interface {
 // The Job type is what the AMQP JSON message is unmarshalled into.
 type Job map[string]interface{}
 
-type runnerFunc func(log *tinylog.Tiny, job Job) error
+type runnerFunc func(log *tinylog.Tiny, messenger minimsg.MiniMessage, job Job) error
 
 // Worker is the actual implementation
 type Worker struct {
@@ -106,7 +106,7 @@ func (w *Worker) RunWorker() error {
 						}
 						continue
 					}
-					w.run(w.log, job)
+					w.run(w.log, messenger, job)
 					// acknowledge the job has finished.
 					if err := d.Ack(false); err != nil {
 						w.log.NewWarning(fmt.Sprintf("Error acknowledging message : %s", err))
